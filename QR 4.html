@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RJF QR</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #d32f2f;
+            --primary-light: #ff6659;
+            --primary-dark: #9a0007;
+            --secondary-color: #ffeb3b;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-light: #f5f5f5;
+            --bg-dark: #212121;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f7d9d9 0%, #f0b3b3 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            background: url("roktojoba-logo.png") center center no-repeat;
+            background-size: contain;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            border: 5px solid white;
+            animation: logoEntrance 1.5s ease-out 0.2s forwards,
+                pulse 2s infinite 1.7s;
+            transform-origin: center;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        @keyframes logoEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            70% {
+                transform: scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(211, 47, 47, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+            }
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: textGlow 3s infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            color: #555;
+            text-align: center;
+        }
+
+        .contact-section {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 400px;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            min-width: 0;
+            max-width: 180px;
+        }
+
+        .contact-info:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-contact {
+            background-color: #25D366;
+        }
+
+        .whatsapp-contact:hover {
+            background-color: #128C7E;
+        }
+
+        .save-contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            min-width: 0;
+            max-width: 180px;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.8s forwards;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .save-contact-btn:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        .links-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.7s forwards;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-color);
+            transform: translateX(-20px);
+            opacity: 0;
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        .link-card:nth-child(1) {
+            animation-delay: 0.9s;
+        }
+
+        .link-card:nth-child(2) {
+            animation-delay: 1.0s;
+        }
+
+        .link-card:nth-child(3) {
+            animation-delay: 1.1s;
+        }
+
+        .link-card:nth-child(4) {
+            animation-delay: 1.2s;
+        }
+
+        .link-card:nth-child(5) {
+            animation-delay: 1.3s;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .link-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            flex-shrink: 0;
+            animation: bounce 2s infinite;
+        }
+
+        .link-icon img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .link-content {
+            flex-grow: 1;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+
+        .link-url {
+            font-size: 0.85rem;
+            color: #666;
+            word-break: break-all;
+        }
+
+        .social-section {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 1.4s forwards;
+        }
+
+        .social-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .social-icon i {
+            position: relative;
+            z-index: 2;
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover::before {
+            transform: scale(1);
+        }
+
+        .social-icon:hover i {
+            color: white;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: auto;
+            opacity: 0;
+            animation: fadeIn 1s ease 2.4s forwards;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+            }
+
+            70% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(211, 47, 47, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            }
+
+            to {
+                text-shadow: 1px 1px 10px rgba(211, 47, 47, 0.5), 1px 1px 3px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .title {
+                font-size: 2rem;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .link-card {
+                padding: 12px;
+            }
+
+            .social-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .contact-info {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+                max-width: 160px;
+            }
+
+            .contact-section {
+                flex-direction: row;
+                max-width: 350px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .contact-info {
+                padding: 10px 8px;
+                font-size: 0.85rem;
+                max-width: 140px;
+            }
+
+            .contact-section {
+                gap: 10px;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo"></div>
+            <h1 class="title">Roktojoba Foundation</h1>
+            <p class="subtitle">Help For Humanity</p>
+            <p class="description">A Non-political, social, humanitarian & voluntary organization dedicated to serving
+                those in need through various initiatives and community support programs.</p>
+            <p class="description">Mobile: +880 1960 506 601</p>
+
+            <div class="contact-section">
+                <a href="tel:01960506601" class="contact-info">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Call</span>
+                </a>
+                <a href="https://wa.me/8801960506601" target="_blank" class="contact-info whatsapp-contact">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+
+            <button class="save-contact-btn" id="saveContactBtn">
+                <i class="fas fa-address-book"></i>
+                <span>Save to Contacts</span>
+            </button>
+        </header>
+
+        <main class="links-container">
+            <div class="link-card">
+                <div class="link-icon">
+                    <img src="https://storage2.me-qr.com/ListofLinks/cc4adfdd-c0c0-4bfa-bd01-087919ad556f.png"
+                        alt="Website Icon">
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Web Site</div>
+                    <div class="link-url">Coming Soon.......</div>
+                </div>
+                <a href="#" target="_blank" class="link-button">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <div class="link-icon">
+                    <img src="https://storage2.me-qr.com/ListofLinks/b63e68cc-3d79-4c2f-b2a8-5286503ae40d.png"
+                        alt="Membership Form Icon">
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Membership Form</div>
+                    <div class="link-url">Fill out the form to become a member of Roktojoba Foundation.</div>
+                </div>
+                <a href="https://forms.gle/kdqjUULhSQFSvx2k6" target="_blank" class="link-button">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <div class="link-icon">
+                    <img src=" RJF Blood Connect App Icon.png" alt="Blood Recipient Form Icon">
+                </div>
+                <div class="link-content">
+                    <div class="link-title">RJF Blood Connect App</div>
+                    <div class="link-url">Download App For Android Device</div>
+                </div>
+                <a href="https://drive.google.com/file/d/1qvtn7uUTE8IoRevHR6D0CBKDMLSrcV5P/view?usp=sharing"
+                    target="_blank" class="link-button">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <div class="link-icon">
+                    <img src="RJF Blood Connect Web Icon.png" alt="Blood Donor Form Icon">
+                </div>
+                <div class="link-content">
+                    <div class="link-title">RJF Blood Connect Web</div>
+                    <div class="link-url">Web for iphone, Laptop & PC</div>
+                </div>
+                <a href="https://roktojobafoundation.github.io/apps/index.html" target="_blank" class="link-button">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+
+            <div class="link-card">
+                <div class="link-icon">
+                    <img src="https://storage2.me-qr.com/ListofLinks/ef730b52-07b6-4796-9fab-5a66bc8290c5.png"
+                        alt="Blood Donor Form Icon">
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Donate now</div>
+                    <div class="link-url">Donate to the Roktojoba Foundation</div>
+                </div>
+                <a href="#" target="_blank" class="link-button">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </main>
+
+        <section class="social-section">
+            <h2 class="social-title">Connect With Us</h2>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/groups/795181972688739/?ref=share&mibextid=NSMWBT" target="_blank"
+                    class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://m.me/j/AbYuekhvpv67GWlz/" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook-messenger"></i>
+                </a>
+                <a href="https://wa.me/8801960506601" target="_blank" class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/roktojoba-foundation-550a12321/" target="_blank"
+                    class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://t.me/roktojoba24" target="_blank" class="social-icon">
+                    <i class="fab fa-telegram-plane"></i>
+                </a>
+                <a href="https://x.com/roktojoba8?t=GuWQ8An2FrBkG4DosGTMIA&s=09" target="_blank" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/roktojobafoundation/" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/@RoktojobaFoundation" target="_blank" class="social-icon">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="mailto:roktojobafoundation@gmail.com?subject=Email&body=Hello, Sir/Madam,%0A%0AWelcome to Roktojoba Foundation!%0AWe're here to help you as quickly as possible.%0APlease let us know how we can assist you today. ❤️"
+                    class="social-icon">
+                    <i class="far fa-envelope"></i>
+                </a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>© 2025 Roktojoba Foundation. All rights reserved.</p>
+            <p>Dedicated to serving humanity with compassion and care.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add click functionality to entire link cards
+        document.querySelectorAll('.link-card').forEach(card => {
+            const link = card.querySelector('a');
+            card.addEventListener('click', (e) => {
+                // Don't trigger if the actual link was clicked
+                if (e.target.tagName !== 'A' && e.target.parentElement.tagName !== 'A') {
+                    link.click();
+                }
+            });
+
+            // Add pointer cursor to entire card
+            card.style.cursor = 'pointer';
+        });
+
+        // Save to Contacts functionality
+        document.getElementById('saveContactBtn').addEventListener('click', function () {
+            const name = "Roktojoba Foundation";
+            const phone = "+8801960506601";
+            const email = "roktojobafoundation@gmail.com";
+            const website = "https://roktojobafoundation.github.io/apps/index.html";
+
+            // Create vCard content
+            const vCard = `BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+TEL:${phone}
+EMAIL:${email}
+URL:${website}
+ORG:Roktojoba Foundation
+NOTE:Help For Humanity - A Non-political, social, humanitarian & voluntary organization
+END:VCARD`;
+
+            // Create blob and download
+            const blob = new Blob([vCard], { type: 'text/vcard' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Roktojoba Foundation.vcf';
+            document.body.appendChild(a);
+            a.click();
+
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+
+            // Show confirmation
+            alert('Roktojoba Foundation contact has been saved to your device!');
+        });
+    </script>
+</body>
+
+</html>
