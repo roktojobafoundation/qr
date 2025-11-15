@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RJF QR</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon Links -->
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="icon" href="favicon.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
     <style>
         :root {
             --primary-color: #d32f2f;
@@ -111,12 +115,15 @@
         }
 
         .title {
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: 10px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
             animation: textGlow 3s infinite alternate;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .subtitle {
@@ -127,10 +134,10 @@
         }
 
         .description {
-            font-size: 1rem;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto 20px;
+            font-size: clamp(0.875rem, 1.5vw + 0.5rem, 1.125rem);
+            line-height: clamp(1.4, 1.5vw + 1rem, 1.6);
+            max-width: min(600px, 95% - 2rem);
+            margin: 0 auto clamp(0.5rem, 2vw, 1rem);
             color: #555;
             text-align: center;
         }
@@ -294,9 +301,14 @@
         }
 
         .link-url {
-            font-size: 0.85rem;
+            font-size: clamp(0.50rem, 2vw, 0.85rem);
             color: #666;
             word-break: break-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            display: block;
         }
 
         .social-section {
@@ -375,10 +387,15 @@
             text-align: center;
             padding: 20px;
             color: #666;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             margin-top: auto;
             opacity: 0;
             animation: fadeIn 1s ease 2.4s forwards;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         /* Animations */
@@ -519,8 +536,8 @@
             <p class="subtitle">Help For Humanity</p>
             <p class="description">A Non-political, social, humanitarian & voluntary organization dedicated to serving
                 those in need through various initiatives and community support programs.</p>
-            <p class="description">Mobile: +880 1960 506 601</p>
-
+            <p class="description">Mobile: 01960 506 601</p>
+            <p class="description">Email: roktojobafoundation@gmail.com</p>
             <div class="contact-section">
                 <a href="tel:01960506601" class="contact-info">
                     <i class="fas fa-phone-alt"></i>
@@ -648,7 +665,8 @@
         <footer class="footer">
             <p>© 2025 Roktojoba Foundation. All rights reserved.</p>
             <p>Dedicated to serving humanity with compassion and care.</p>
-            <p>Developed by <a href="https://www.facebook.com/md.tasrik.hossain" class="text-decoration-none">MD Tasrik Hossain</a></p>
+            <p>Design & Developed by <a href="https://www.facebook.com/md.tasrik.hossain"
+                    class="text-decoration-none">MD Tasrik Hossain</a></p>
         </footer>
     </div>
 
