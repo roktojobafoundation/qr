@@ -115,7 +115,7 @@
         }
 
         .title {
-            font-size: clamp(1.1rem, 4vw, 2.5rem);
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: 10px;
@@ -301,14 +301,14 @@
         }
 
         .link-url {
-            font-size: clamp(0.40rem, 2vw, 0.85rem);
+            font-size: clamp(0.50rem, 2vw, 0.85rem);
             color: #666;
-            word-break: break-all;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            word-break: break-word;
+            white-space: normal;
+            overflow: visible;
             max-width: 100%;
             display: block;
+            line-height: 1.4;
         }
 
         .social-section {
@@ -655,7 +655,8 @@
                 <a href="https://www.youtube.com/@RoktojobaFoundation" target="_blank" class="social-icon">
                     <i class="fab fa-youtube"></i>
                 </a>
-                <a href="mailto:roktojobafoundation@gmail.com?subject=Email&body=Hello, Sir/Madam,%0A%0AWelcome to Roktojoba Foundation!%0AWe're here to help you as quickly as possible.%0APlease let us know how we can assist you today. ❤️%0A%0A " class="social-icon">
+                <a href="mailto:roktojobafoundation@gmail.com?subject=Email&body=Hello, Sir/Madam,%0A%0AWelcome to Roktojoba Foundation!%0AWe're here to help you as quickly as possible.%0APlease let us know how we can assist you today. ❤️%0A%0A"
+                    class="social-icon">
                     <i class="far fa-envelope"></i>
                 </a>
             </div>
