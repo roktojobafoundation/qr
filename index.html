@@ -115,32 +115,12 @@
         }
 
         .title {
-            font-size: clamp(1.1rem, 5vw, 2.5rem);
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary-dark);
-            margin-bottom: clamp(5px, 2vw, 10px);
+            margin-bottom: 10px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
             animation: textGlow 3s infinite alternate;
-
-            /* Prevent text wrapping and handle overflow */
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            /* Ensure proper box sizing */
-            box-sizing: border-box;
-            max-width: 100%;
-
-            /* Add some padding for better appearance */
-            padding: 0 10px;
-        }
-
-        /* iPhone 12 Pro specific optimization */
-        @media (max-width: 390px) {
-            .title {
-                font-size: clamp(1rem, 4.5vw, 1.3rem);
-                padding: 0 8px;
-            }
         }
 
         .subtitle {
