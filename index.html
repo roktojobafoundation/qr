@@ -683,7 +683,9 @@
         // Save to Contacts functionality
         document.getElementById('saveContactBtn').addEventListener('click', function () {
             const name = "Roktojoba Foundation";
-            const phone = "+8801960506601";
+            const phone1 = "+8801960506601";
+            const phone2 = "+8801606964550";
+            const address = "Chandpur, Chittagong, Bangladesh"
             const email = "roktojobafoundation@gmail.com";
             const website = "https://roktojobafoundation.github.io/qr/";
 
@@ -691,7 +693,9 @@
             const vCard = `BEGIN:VCARD
 VERSION:3.0
 FN:${name}
-TEL:${phone}
+TEL:${phone1}
+TEL:${phone2}
+ADR:${address}
 EMAIL:${email}
 URL:${website}
 ORG:Roktojoba Foundation
@@ -721,4 +725,5 @@ END:VCARD`;
 </body>
 
 </html>
+
 
